@@ -1,0 +1,30 @@
+#----------------------------------------------------------------------
+# -> Wordpress dockerfile
+FROM alpine:3.15
+LABEL version="3.15"
+LABEL description="Wordpress Container"
+#----------------------------------------------------------------------
+
+# update the platform if needed
+RUN apk update && apk upgrade
+
+#installing php
+RUN apk add php7-fpm php7 php-phar php-mysqli php7-json
+
+#installing wordpress
+#CHANGE PATH TO ENV VARIABLE
+RUN	mkdir -p /var/www/tweimer.42.fr/html\
+	&& chmod 777 /var/www/tweimer.42.fr/html\
+	&& wget http://wordpress.org/latest.tar.gz\
+	&& tar -xzvf latest.tar.gz\
+	&& mv wordpress/* /var/www/tweimer.42.fr/html
+
+EXPOSE 9000
+
+# replace the config file by a custom one
+RUN  rm -f /var/www/tweimer.42.fr/html/wp-include/wp-config.php /etc/php7/php-fpm.d/www.conf
+COPY conf/wp-config.php /var/www/tweimer.42.fr/html/wp-config.php
+COPY conf/www.conf /etc/php7/php-fpm.d/www.conf
+# wp plugin install [plugin] --activate
+
+CMD ["/usr/sbin/php-fpm7", "-F"]

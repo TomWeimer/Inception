@@ -7,13 +7,14 @@ services:
     ports:
       - 443:443
     volumes:
-      - website-volume:/var/www/wordpress
+      - website-volume:/var/www/tweimer.42.fr/
     env_file:
       - .env
     networks:
       - inception-network
     depends_on:
       - wordpress
+    # restart: always
 
   wordpress:
     container_name: wordpress
@@ -21,13 +22,15 @@ services:
     ports:
       - 9000:9000
     volumes:
-      - website-volume:/var/www/wordpress
+      - website-volume:/var/www/tweimer.42.fr
     depends_on:
       - mariadb
     env_file:
       - .env
     networks:
       - inception-network
+    init: true
+    # restart: always
 
   mariadb:
     container_name: mariadb
@@ -40,15 +43,9 @@ services:
       - .env
     networks:
       - inception-network
-  
+    init: true
+    # restart: always
 
-  # nginx:
-  # container_name: nginx
-  # build: requirements/nginx
-  # ports:
-  #   - 443:443
-  # volumes:
-  #   - wordpress-volume:/var/lib/mysql
 volumes:
   data-volume:
     name: data-volume

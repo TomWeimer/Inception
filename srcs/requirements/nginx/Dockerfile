@@ -5,19 +5,15 @@ LABEL version="3.15"
 LABEL description="NGINX Container"
 #----------------------------------------------------------------------
 
-# update the platform if needed
-RUN apk update && apk upgrade\
-# installing nginx and openssl
-	&& apk add nginx openssl\
-# creating a self signed certificate
-	&& openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes\
-		-out /etc/ssl/nginx.pem\
-		-keyout /etc/ssl/nginx.key\
-		-subj "/C=CH/ST=Vaud/L=Lausanne/O=wordpress/CN=$DOMAIN_NAME";
+# update and install nginx, openssl
+RUN apk update\
+ 	&& apk upgrade\
+	&& apk add nginx openssl
 
 # replace nginx config file
-COPY conf/my_nginx.conf /etc/nginx/http.d/my_nginx.conf
+COPY conf/my_nginx.conf		/etc/nginx/http.d/my_nginx.conf
+COPY tool/start_nginx.sh	start_nginx.sh
 
 EXPOSE 443
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["sh", "start_nginx.sh"]

@@ -23,8 +23,9 @@ COPY conf/wp-config.php wp-config.php
 
 # replacing a php config file
 COPY conf/www.conf /etc/php7/php-fpm.d/www.conf
-COPY conf/wordpress.sh wordpress.sh
+COPY tool/start_wordpress.sh start_wordpress.sh
 
 EXPOSE 9000
 
-CMD ["sh", "wordpress.sh"]
+CMD ["sh", "start_wordpress.sh"]
+

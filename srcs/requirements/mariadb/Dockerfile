@@ -18,10 +18,9 @@ RUN apk update && apk upgrade\
 # replace mariadb config files
 COPY conf/my.cnf /etc/my.cnf.d/my.cnf
 # getting script to create the database
-COPY conf/create_db.sh create_db.sh
+COPY tool/create_db.sh create_db.sh
 
 EXPOSE 3306
 
 CMD ["sh", "create_db.sh"]
-
 

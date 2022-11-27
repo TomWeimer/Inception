@@ -14,7 +14,7 @@ services:
       - inception-network
     depends_on:
       - wordpress
-    # restart: always
+    restart: always
 
   wordpress:
     container_name: wordpress
@@ -29,8 +29,7 @@ services:
       - .env
     networks:
       - inception-network
-    init: true
-    # restart: always
+    restart: always
 
   mariadb:
     container_name: mariadb
@@ -43,8 +42,7 @@ services:
       - .env
     networks:
       - inception-network
-    init: true
-    # restart: always
+    restart: always
 
 volumes:
   data-volume:
@@ -53,7 +51,7 @@ volumes:
     driver_opts:
       o: bind
       type: none
-      device: /Users/tweimer/Documents/Docker/Inception2/data/data_base
+      device: /home/tweimer/data/data_base
   
   website-volume:
     name: website-volume
@@ -61,7 +59,7 @@ volumes:
     driver_opts:
       o: bind
       type: none
-      device: /Users/tweimer/Documents/Docker/Inception2/data/wp
+      device: /home/tweimer/data/wp
 networks:
   inception-network:
     

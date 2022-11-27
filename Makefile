@@ -1,6 +1,6 @@
 USER = tweimer
 DOCKER = docker compose -p "inception"
-HOME	= /Users/tweimer/Documents/Docker/Inception2/
+HOME	= /home/tweimer
 IMAGE=
 # /Users/$(USER)/Documents/Docker/Inception/home
 
@@ -10,7 +10,7 @@ up:
 	@mkdir -p $(HOME)/data
 	@mkdir -p $(HOME)/data/data_base
 	@mkdir -p $(HOME)/data/wp
-	@$(DOCKER) -f srcs/docker-compose.yml up
+	@$(DOCKER)  -f srcs/docker-compose.yml  up -d
 
 down: 
 	@$(DOCKER) -f srcs/docker-compose.yml  down

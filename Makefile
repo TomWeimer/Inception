@@ -1,6 +1,5 @@
 USER = tweimer
 DOCKER = docker compose -p "inception"
-HOME	= /home/tweimer
 IMAGE=
 # /Users/$(USER)/Documents/Docker/Inception/home
 

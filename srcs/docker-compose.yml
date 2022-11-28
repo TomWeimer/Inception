@@ -51,7 +51,7 @@ volumes:
     driver_opts:
       o: bind
       type: none
-      device: /home/tweimer/data/data_base
+      device: ${HOME}/data/data_base
   
   website-volume:
     name: website-volume
@@ -59,7 +59,7 @@ volumes:
     driver_opts:
       o: bind
       type: none
-      device: /home/tweimer/data/wp
+      device: ${HOME}/data/wp
 networks:
   inception-network:
     
